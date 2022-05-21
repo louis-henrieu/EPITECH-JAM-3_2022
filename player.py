@@ -2,7 +2,7 @@ import pygame
 
 class Player(pygame.sprite.Sprite):
 
-    def __init__(self, x, y):
+    def __init__(self, x, y, choose_p):
         super().__init__()
         self.sprite_sheet = pygame.image.load("sprites_family.png")
         self.image = self.get_image(0, 0)
@@ -10,10 +10,10 @@ class Player(pygame.sprite.Sprite):
         self.rect = self.image.get_rect()
         self.position = [x, y]
         self.images = {
-            "up": self.get_image(111, 99),
-            "down": self.get_image(111, 0),
-            "right": self.get_image(111, 66),
-            "left": self.get_image(111, 33)
+            "up": self.get_image(111, 99 if choose_p else 232),
+            "down": self.get_image(111, 0 if choose_p else 132),
+            "right": self.get_image(111, 66 if choose_p else 198),
+            "left": self.get_image(111, 33 if choose_p else 165)
         }
         self.feet = pygame.Rect(0, 0, self.rect.width * 0.5, 12)
         self.old_position = self.position.copy()
@@ -53,7 +53,7 @@ class Player(pygame.sprite.Sprite):
 
 class Player2(pygame.sprite.Sprite):
 
-    def __init__(self, x, y):
+    def __init__(self, x, y, choose_p):
         super().__init__()
         self.sprite_sheet = pygame.image.load("sprites_family.png")
         self.image = self.get_image(0, 0)
@@ -61,10 +61,10 @@ class Player2(pygame.sprite.Sprite):
         self.rect = self.image.get_rect()
         self.position = [x, y]
         self.images = {
-            "up": self.get_image(111, 232),
-            "down": self.get_image(111, 132),
-            "right": self.get_image(111, 198),
-            "left": self.get_image(111, 165)
+            "up": self.get_image(44, 232 if choose_p else 99),
+            "down": self.get_image(44, 132 if choose_p else 0),
+            "right": self.get_image(44, 198 if choose_p else 66),
+            "left": self.get_image(44, 165 if choose_p else 33)
         }
         self.feet = pygame.Rect(0, 0, self.rect.width * 0.5, 12)
         self.old_position = self.position.copy()

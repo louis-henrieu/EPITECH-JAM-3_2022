@@ -19,12 +19,15 @@ class Menu:
         textrect.topleft = (x, y)
         surface.blit(textobj, textrect)
 
-    def menu(self, clock, ingame):
+    def menu(self, ingame):
+        clock = pygame.time.Clock()
         menu_font = pygame.font.SysFont("symbola", 100)
         button_font = pygame.font.SysFont("symbola", 60)
+        choose_font = pygame.font.SysFont("symbola", 35)
         #menu_text = menu_font.render('Menu' , True , (255, 255, 255))
         button_1_text = button_font.render('Play' if ingame else 'Resume' , True , (255, 255, 255))
         button_2_text = button_font.render('Quit' , True , (255, 255, 255))
+        choose_text = choose_font.render('Choose your family members' , True , (255, 255, 255))
         menu_loop = True
         click = False
         while menu_loop:
@@ -51,8 +54,9 @@ class Menu:
                 if click:
                     menu_loop = False
                     self.running = False
-            self.screen.blit(button_1_text, (130, 235)  if ingame else (110, 235))
+            self.screen.blit(button_1_text, (130, 235)  if ingame else (90, 235))
             self.screen.blit(button_2_text, (130, 355))
+            self.screen.blit(choose_text, (425, 150))
 
             # Ligne pour relier les personnages (arbre généalogique)
             pygame.draw.line(self.screen, (255, 255, 255), [510, 275], [660, 275], 7)
@@ -66,9 +70,32 @@ class Menu:
             self.screen.blit(self.images[2], (600, 200)) # Mother
             self.screen.blit(self.images[0], (450, 400)) # Daughter
             self.screen.blit(self.images[3], (600, 400)) # Son
+        
+            # Choix des personnages
+            father_rect = pygame.Rect(448, 198, 122, 125)
+            mother_rect = pygame.Rect(598, 198, 122, 125)
+            daughter_rect = pygame.Rect(448, 398, 122, 125)
+            son_rect = pygame.Rect(598, 398, 122, 125)
 
+            if (father_rect.collidepoint((mx, my)) and ingame) or self.player_1 == True:
+                if click or self.player_1 == True:
+                    pygame.draw.rect(self.screen, (72, 61, 56), father_rect, 2)
+                    self.player_1 = True
+            if (mother_rect.collidepoint((mx, my)) and ingame) or self.player_1 == False:
+                if click or self.player_1 == False:
+                    pygame.draw.rect(self.screen, (72, 61, 56), mother_rect, 2)
+                    self.player_1 = False
+            if (daughter_rect.collidepoint((mx, my)) and ingame) or self.player_2 == True:
+                if click or self.player_2 == True:
+                    pygame.draw.rect(self.screen, (72, 61, 56), daughter_rect, 2)
+                    self.player_2 = True
+            if (son_rect.collidepoint((mx, my)) and ingame) or self.player_2 == False:
+                if click or self.player_2 == False:
+                    pygame.draw.rect(self.screen, (72, 61, 56), son_rect, 2)
+                    self.player_2 = False
 
             # Boucle du menu
+            click = False
             for event in pygame.event.get():
                 # Que faire si on clique sur la croix pour fermer la fenêtre
                 if event.type == pygame.QUIT:

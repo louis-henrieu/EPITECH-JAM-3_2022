@@ -29,15 +29,22 @@ class Game:
         #mixer.music.load('simpson.mp3')
         #mixer.music.play(-1)
 
+        # Choix du personnage
+        self.player_1 = True # Dad (true) / Mom (false)
+        self.player_2 = True # Son (true) / Daughter (false)
+
+        self.myMenu = Menu(self.screen, self.player_1, self.player_2)
+        self.running, self.player_1, self.player_2 = self.myMenu.menu(True)
+
         # Générer le joeur
-        player_position = tmx_data.get_object_by_name("player")
-        self.player = Player(player_position.x, player_position.y)
+        player_position = tmx_data.get_object_by_name("player_1")
+        self.player = Player(player_position.x, player_position.y, self.player_1)
 
         # Définir le logo du jeu
         pygame.display.set_icon(self.player.get())
 
-        player_position2 = tmx_data.get_object_by_name("player")
-        self.player2 = Player2(player_position2.x, player_position2.y)
+        player_position2 = tmx_data.get_object_by_name("player_2")
+        self.player2 = Player2(player_position2.x, player_position2.y, self.player_2)
 
         # Afficher la box avec les informations
         self.info = Info()
@@ -46,9 +53,6 @@ class Game:
         # Définir le logo du jeu
         pygame.display.set_icon(self.player2.get())
 
-        # Choix du personnage
-        self.player_1 = True # Dad (true) / Mom (false)
-        self.player_2 = True # Son (true) / Daughter (false)
 
         # Les collisions
         self.walls = []
@@ -171,10 +175,8 @@ class Game:
                 sprite.move_back()
 
     def run(self):
-        myMenu = Menu(self.screen, self.player_1, self.player_2)
         clock = pygame.time.Clock()
         # Clock
-        self.running, self.player_1, self.player_2 = myMenu.menu(clock, True)
         while self.running:
 
             # Récupérer les touches du clavier
@@ -205,7 +207,7 @@ class Game:
                 self.running = False
             # Ouverture du menu grâce à la touche M
             if pressed[pygame.K_m]:
-                self.running, self.player_1, self.player_2 = myMenu.menu(clock, False)
+                self.running, self.player_1, self.player_2 = self.myMenu.menu(False)
             clock.tick(60)
 
         pygame.quit()
