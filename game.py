@@ -2,9 +2,11 @@ import pygame
 import pytmx
 import pyscroll
 
-from player import Player
+from pygame import mixer
+from player import Player, Player2
 from menu import Menu
-
+from info import Info
+from quest import Quest
 
 class Game:
 
@@ -23,12 +25,26 @@ class Game:
         map_layer = pyscroll.orthographic.BufferedRenderer(map_data, self.screen.get_size())
         map_layer.zoom = 2
 
+        # Charger la musique
+        #mixer.music.load('simpson.mp3')
+        #mixer.music.play(-1)
+
         # Générer le joeur
         player_position = tmx_data.get_object_by_name("player")
         self.player = Player(player_position.x, player_position.y)
 
         # Définir le logo du jeu
         pygame.display.set_icon(self.player.get())
+
+        player_position2 = tmx_data.get_object_by_name("player")
+        self.player2 = Player2(player_position2.x, player_position2.y)
+
+        # Afficher la box avec les informations
+        self.info = Info()
+        self.quest = Quest()
+
+        # Définir le logo du jeu
+        pygame.display.set_icon(self.player2.get())
 
         # Choix du personnage
         self.player_1 = True # Dad (true) / Mom (false)
@@ -44,12 +60,14 @@ class Game:
         # Dessiner les différents calques
         self.group = pyscroll.PyscrollGroup(map_layer=map_layer, default_layer=5)
         self.group.add(self.player)
+        self.group.add(self.player2)
 
         # Porte de la maison
         enter_house = tmx_data.get_object_by_name("enter_house")
         self.enter_house_rect = pygame.Rect(enter_house.x, enter_house.y, enter_house.width, enter_house.height)
 
     def handle_input(self, pressed):
+
         if pressed[pygame.K_ESCAPE]:
             self.running = False
         elif pressed[pygame.K_UP]:
@@ -60,6 +78,19 @@ class Game:
             self.player.move_player("right")
         elif pressed[pygame.K_LEFT]:
             self.player.move_player("left")
+
+    def handle_input2(self, pressed):
+
+        if pressed[pygame.K_ESCAPE]:
+            self.running = False
+        elif pressed[pygame.K_q]:
+            self.player2.move_player("up")
+        elif pressed[pygame.K_z]:
+            self.player2.move_player("down")
+        elif pressed[pygame.K_d]:
+            self.player2.move_player("right")
+        elif pressed[pygame.K_s]:
+            self.player2.move_player("left")
 
     def switch_house(self):
         self.map = "house"
@@ -80,6 +111,7 @@ class Game:
         # Dessiner les différents calques
         self.group = pyscroll.PyscrollGroup(map_layer=map_layer, default_layer=5)
         self.group.add(self.player)
+        self.group.add(self.player2)
 
         # Porte de la maison
         enter_house = tmx_data.get_object_by_name("exit_house")
@@ -89,6 +121,8 @@ class Game:
         spawn_house_point = tmx_data.get_object_by_name("spawn_house")
         self.player.position[0] = spawn_house_point.x
         self.player.position[1] = spawn_house_point.y - 20
+        self.player2.position[0] = spawn_house_point.x
+        self.player2.position[1] = spawn_house_point.y - 20
 
     def switch_world(self):
         self.map = "world"
@@ -109,6 +143,7 @@ class Game:
         # Dessiner les différents calques
         self.group = pyscroll.PyscrollGroup(map_layer=map_layer, default_layer=5)
         self.group.add(self.player)
+        self.group.add(self.player2)
 
         # Porte de la maison
         enter_house = tmx_data.get_object_by_name("enter_house")
@@ -118,15 +153,16 @@ class Game:
         spawn_house_point = tmx_data.get_object_by_name("enter_house_exit")
         self.player.position[0] = spawn_house_point.x
         self.player.position[1] = spawn_house_point.y + 20
+        self.player2.position[0] = spawn_house_point.x
+        self.player2.position[1] = spawn_house_point.y + 20
 
     def update(self):
         self.group.update()
 
         # Vérifier l'entrer de la maison
-        if self.map == "world" and self.player.feet.colliderect(self.enter_house_rect):
+        if self.map == "world" and self.player.feet.colliderect(self.enter_house_rect) and self.player2.feet.colliderect(self.enter_house_rect):
             self.switch_house()
-
-        if self.map == "house" and self.player.feet.colliderect(self.enter_house_rect):
+        if self.map == "house" and self.player.feet.colliderect(self.enter_house_rect) and self.player2.feet.colliderect(self.enter_house_rect):
             self.switch_world()
            
         # Vérification des collisions
@@ -146,16 +182,24 @@ class Game:
 
             # Gestion des évènements
             self.player.save_location()
+            self.player2.save_location()
             self.handle_input(pressed)
+            self.handle_input2(pressed)
             self.update()
             self.group.center(self.player.rect.center)
+            self.group.center(self.player2.rect.center)
             self.group.draw(self.screen)
+            self.info.render(self.screen)
+            self.quest.render(self.screen)
             pygame.display.flip()
 
             # Fermeture de la window grâce à la croix
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     self.running = False
+                elif event.type == pygame.KEYDOWN:
+                    if event.key == pygame.K_SPACE:
+                        self.quest.next_text()
             # Fermeture de la window grâce à la touche P
             if pressed[pygame.K_p]:
                 self.running = False
