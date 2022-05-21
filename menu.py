@@ -20,8 +20,8 @@ class Menu:
         surface.blit(textobj, textrect)
 
     def menu(self, clock, ingame):
-        menu_font = pygame.font.SysFont("comicsansms", 60)
-        button_font = pygame.font.SysFont("comicsansms", 35)
+        menu_font = pygame.font.SysFont("symbola", 100)
+        button_font = pygame.font.SysFont("symbola", 60)
         #menu_text = menu_font.render('Menu' , True , (255, 255, 255))
         button_1_text = button_font.render('Play' if ingame else 'Resume' , True , (255, 255, 255))
         button_2_text = button_font.render('Quit' , True , (255, 255, 255))
@@ -51,8 +51,8 @@ class Menu:
                 if click:
                     menu_loop = False
                     self.running = False
-            self.screen.blit(button_1_text, (130, 230)  if ingame else (110, 230))
-            self.screen.blit(button_2_text, (130, 350))
+            self.screen.blit(button_1_text, (130, 235)  if ingame else (110, 235))
+            self.screen.blit(button_2_text, (130, 355))
 
             # Ligne pour relier les personnages (arbre généalogique)
             pygame.draw.line(self.screen, (255, 255, 255), [510, 275], [660, 275], 7)

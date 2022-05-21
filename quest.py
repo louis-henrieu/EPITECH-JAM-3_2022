@@ -10,7 +10,7 @@ class Quest(pygame.sprite.Sprite):
         self.texts = ["Trouvez Ellie en réalisant trois défis pour tester votre travail d'équipe ! ->", "1) Trouvez chacun deux donuts."]
         self.text_idx = 0
         self.ltr_idx = 0
-        self.font = pygame.font.SysFont("Symbol", 23)
+        self.font = pygame.font.SysFont("symbola", 23)
         self.reading = True
 
     def render(self, screen):
