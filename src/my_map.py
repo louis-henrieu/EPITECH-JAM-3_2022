@@ -75,7 +75,7 @@ class MapManager:
                 point = self.get_object(portal.origin_point)
                 rect = pygame.Rect(point.x, point.y, point.width, point.height)
             
-            if self.player.feet.colliderect(rect) or self.player2.feet.colliderect(rect):#and self.player2.feet.colliderect(rect) and self.donut_nb == 1 and self.donut_nb1 == 1:
+            if self.player.feet.colliderect(rect) and self.player2.feet.colliderect(rect) and self.donut_nb == 1 and self.donut_nb1 == 1:
                 copy_portal = portal
                 self.current_map = portal.target_world
                 self.teleport_player(copy_portal.teleport_point)
