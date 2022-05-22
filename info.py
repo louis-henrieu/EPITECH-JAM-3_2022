@@ -3,7 +3,7 @@ import pygame
 class Info(pygame.sprite.Sprite):
     def __init__(self):
         self.quests_done = 0
-        self.info = pygame.image.load('info.png')
+        self.info = pygame.image.load('./assets/map/info.png')
         self.info = pygame.transform.scale(self.info, (220, 120))
         self.text = str(self.quests_done) + "/2 quests done !"
         self.font = pygame.font.SysFont("Helvetica", 15, bold=True)

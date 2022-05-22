@@ -22,7 +22,7 @@ class Game:
         pygame.display.set_caption("Family Reunion")
 
         # Charger la carte clasique
-        tmx_data = pytmx.util_pygame.load_pygame("carte.tmx")
+        tmx_data = pytmx.util_pygame.load_pygame("./assets/map_config/carte.tmx")
         map_data = pyscroll.data.TiledMapData(tmx_data)
         map_layer = pyscroll.orthographic.BufferedRenderer(map_data, self.screen.get_size())
         map_layer.zoom = 2
@@ -126,7 +126,7 @@ class Game:
         self.map = "house"
 
         # Charger la carte clasique
-        tmx_data = pytmx.util_pygame.load_pygame("house.tmx")
+        tmx_data = pytmx.util_pygame.load_pygame("./assets/map_config/house.tmx")
         map_data = pyscroll.data.TiledMapData(tmx_data)
         map_layer = pyscroll.orthographic.BufferedRenderer(map_data, self.screen.get_size())
         map_layer.zoom = 2
@@ -158,7 +158,7 @@ class Game:
         self.map = "world"
 
         # Charger la carte clasique
-        tmx_data = pytmx.util_pygame.load_pygame("carte.tmx")
+        tmx_data = pytmx.util_pygame.load_pygame("./assets/map_config/carte.tmx")
         map_data = pyscroll.data.TiledMapData(tmx_data)
         map_layer = pyscroll.orthographic.BufferedRenderer(map_data, self.screen.get_size())
         map_layer.zoom = 2

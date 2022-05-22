@@ -4,7 +4,7 @@ class Player(pygame.sprite.Sprite):
 
     def __init__(self, x, y, choose_p):
         super().__init__()
-        self.sprite_sheet = pygame.image.load("sprites_family.png")
+        self.sprite_sheet = pygame.image.load("./assets/family/sprites_family.png")
         self.image = self.get_image(0, 0)
         self.image.set_colorkey([0, 0, 0])
         self.rect = self.image.get_rect()
@@ -55,7 +55,7 @@ class Player2(pygame.sprite.Sprite):
 
     def __init__(self, x, y, choose_p):
         super().__init__()
-        self.sprite_sheet = pygame.image.load("sprites_family.png")
+        self.sprite_sheet = pygame.image.load("./assets/family/sprites_family.png")
         self.image = self.get_image(0, 0)
         self.image.set_colorkey([0, 0, 0])
         self.rect = self.image.get_rect()
