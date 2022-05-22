@@ -21,8 +21,8 @@ class Game:
         pygame.display.set_caption("Family Reunion")
 
         # Charger la musique
-        mixer.music.load('./assets/music/simpson.mp3')
-        mixer.music.play(-1)
+        #mixer.music.load('./assets/music/simpson.mp3')
+        #mixer.music.play(-1)
 
         # Choix du personnage
         self.player_1 = True # Dad (true) / Mom (false)
@@ -74,7 +74,7 @@ class Game:
             self.player2.move_player("left")
 
     def update(self):
-        self.map_manager.update()
+        self.running = self.map_manager.update()
 
     def run(self):
         clock = pygame.time.Clock()

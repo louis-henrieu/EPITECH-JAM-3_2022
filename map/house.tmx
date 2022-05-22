@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.5" tiledversion="1.5.0" orientation="orthogonal" renderorder="right-down" width="25" height="25" tilewidth="16" tileheight="16" infinite="0" nextlayerid="15" nextobjectid="89">
+<map version="1.8" tiledversion="1.8.5" orientation="orthogonal" renderorder="right-down" width="25" height="25" tilewidth="16" tileheight="16" infinite="0" nextlayerid="15" nextobjectid="89">
  <tileset firstgid="1" source="house.tsx"/>
  <tileset firstgid="776" name="ghost" tilewidth="17" tileheight="27" tilecount="1" columns="1">
   <image source="ghost.png" width="17" height="27"/>
@@ -133,7 +133,7 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,776,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -176,8 +176,7 @@
   <object id="79" type="collision" x="176.082" y="159.574" width="223.771" height="32.0983"/>
   <object id="80" type="collision" x="256.328" y="7.33676" width="16.0492" height="120.139"/>
   <object id="81" type="collision" x="176.541" y="224.23" width="15.5906" height="166.911"/>
-  <object id="87" name="ghost" type="collision" x="257" y="116.5" width="15.5" height="42.5"/>
-  <object id="88" name="baby" type="collision" x="354" y="93.5" width="13" height="33.5"/>
+  <object id="88" name="baby" type="collision" x="354" y="101.5" width="13" height="33.5"/>
  </objectgroup>
  <layer id="14" name="Tile Layer 8" width="25" height="25">
   <data encoding="csv">

@@ -2,6 +2,7 @@ import pygame, pytmx, pyscroll
 from dataclasses import dataclass
 from typing import List
 from src.info import Info
+from src.win import Win
 
 @dataclass
 class Portal:
@@ -47,6 +48,7 @@ class MapManager:
         self.rect1 = pygame.Rect(donut1.x, donut1.y, donut1.width, donut1.height)
         donut2 = self.get_object("donut_2")
         self.rect2 = pygame.Rect(donut2.x, donut2.y, donut2.width, donut2.height)
+        self.myWin = Win(self.screen)
     
     def display_donut(self):
         if self.donut_nb == 1 and self.donut_nb1 == 1:
@@ -66,13 +68,14 @@ class MapManager:
             pygame.time.delay(1000)
     
     def check_collision(self):
+        running = True
         #Vérifier si portails
         for portal in self.get_map().portals:
             if portal.from_world == self.current_map:
                 point = self.get_object(portal.origin_point)
                 rect = pygame.Rect(point.x, point.y, point.width, point.height)
             
-            if self.player.feet.colliderect(rect) and self.player2.feet.colliderect(rect) and self.donut_nb == 1 and self.donut_nb1 == 1:
+            if self.player.feet.colliderect(rect) or self.player2.feet.colliderect(rect):#and self.player2.feet.colliderect(rect) and self.donut_nb == 1 and self.donut_nb1 == 1:
                 copy_portal = portal
                 self.current_map = portal.target_world
                 self.teleport_player(copy_portal.teleport_point)
@@ -84,11 +87,19 @@ class MapManager:
         if self.player2.feet.colliderect(self.rect2) and self.donut_nb1 != 1:
             self.donut_nb1 = 1
             self.display_donut()
-        
+        if self.current_map == "house":
+            self.baby = self.get_object("baby")
+            self.rectbaby = pygame.Rect(self.baby.x, self.baby.y, self.baby.width, self.baby.height)
+            if (self.player.feet.colliderect(self.rectbaby) or self.player2.feet.colliderect(self.rectbaby)):
+                self.myWin.win(False)
+                running = False
+
+
         #Vérifier si collision
         for sprite in self.get_group().sprites():
             if sprite.feet.collidelist(self.get_walls()) > -1:
                 sprite.move_back()
+        return running
 
     def teleport_player(self, name):
         point = self.get_object(name)
@@ -141,4 +152,4 @@ class MapManager:
     
     def update(self):
         self.get_group().update()
-        self.check_collision()
+        return self.check_collision()
