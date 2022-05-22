@@ -190,7 +190,8 @@ class Game:
         self.group.update()
 
         # Vérifier l'entrer de la maison
-        if self.map == "world" and self.player.feet.colliderect(self.enter_house_rect) and self.player2.feet.colliderect(self.enter_house_rect):
+        if self.map == "world" and self.player.feet.colliderect(self.enter_house_rect) and\
+                        self.player2.feet.colliderect(self.enter_house_rect) and self.info.quests_done == 1:
             self.switch_house()
         if self.map == "house" and self.player.feet.colliderect(self.enter_house_rect) and self.player2.feet.colliderect(self.enter_house_rect):
             self.switch_world()
