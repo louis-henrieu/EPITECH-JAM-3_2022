@@ -21,7 +21,7 @@ class Game:
         pygame.display.set_caption("Family Reunion")
 
         # Charger la musique
-        mixer.music.load('./assets/music/simpson.mp3')
+        mixer.music.load('./assets/music/simpson.wav')
         mixer.music.play(-1)
 
         # Choix du personnage
