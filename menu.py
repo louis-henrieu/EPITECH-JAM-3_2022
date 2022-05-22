@@ -24,10 +24,16 @@ class Menu:
         menu_font = pygame.font.SysFont("symbola", 100)
         button_font = pygame.font.SysFont("symbola", 60)
         choose_font = pygame.font.SysFont("symbola", 35)
+        name_font = pygame.font.SysFont("symbola", 25)
         #menu_text = menu_font.render('Menu' , True , (255, 255, 255))
         button_1_text = button_font.render('Play' if ingame else 'Resume' , True , (255, 255, 255))
         button_2_text = button_font.render('Quit' , True , (255, 255, 255))
-        choose_text = choose_font.render('Choose your family members' , True , (255, 255, 255))
+        choose_text = choose_font.render('Choisis ta famille' , True , (255, 255, 255))
+        name_text = [
+            name_font.render('Patrik (le père)' , True , (255, 255, 255)),
+            name_font.render('Mary (la mère)' , True , (255, 255, 255)),
+            name_font.render('Mattéo (le fils)' , True , (255, 255, 255)),
+            name_font.render('Lise (la fille)' , True , (255, 255, 255))]
         menu_loop = True
         click = False
         while menu_loop:
@@ -56,7 +62,7 @@ class Menu:
                     self.running = False
             self.screen.blit(button_1_text, (130, 235)  if ingame else (90, 235))
             self.screen.blit(button_2_text, (130, 355))
-            self.screen.blit(choose_text, (425, 150))
+            self.screen.blit(choose_text, (500, 150))
 
             # Ligne pour relier les personnages (arbre généalogique)
             pygame.draw.line(self.screen, (255, 255, 255), [510, 275], [660, 275], 7)
@@ -70,6 +76,11 @@ class Menu:
             self.screen.blit(self.images[2], (600, 200)) # Mother
             self.screen.blit(self.images[0], (450, 400)) # Daughter
             self.screen.blit(self.images[3], (600, 400)) # Son
+            self.screen.blit(name_text[0], (450, 325)) # Father
+            self.screen.blit(name_text[1], (600, 325)) # Mother
+            self.screen.blit(name_text[3], (450, 525)) # Daughter
+            self.screen.blit(name_text[2], (600, 525)) # Son
+
         
             # Choix des personnages
             father_rect = pygame.Rect(448, 198, 122, 125)
