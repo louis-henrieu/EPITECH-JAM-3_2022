@@ -21,9 +21,9 @@ class Menu:
 
     def menu(self, ingame):
         clock = pygame.time.Clock()
-        menu_font = pygame.font.SysFont("symbola", 100)
-        button_font = pygame.font.SysFont("symbola", 60)
-        choose_font = pygame.font.SysFont("symbola", 35)
+        menu_font = pygame.font.SysFont("symbola", 80)
+        button_font = pygame.font.SysFont("symbola", 40)
+        choose_font = pygame.font.SysFont("symbola", 25)
         #menu_text = menu_font.render('Menu' , True , (255, 255, 255))
         button_1_text = button_font.render('Play' if ingame else 'Resume' , True , (255, 255, 255))
         button_2_text = button_font.render('Quit' , True , (255, 255, 255))
