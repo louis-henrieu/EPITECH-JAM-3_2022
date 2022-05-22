@@ -11,7 +11,6 @@ class Menu:
             pygame.transform.scale(pygame.image.load("./assets/family/father.png").convert_alpha(),   (120, 120)),
             pygame.transform.scale(pygame.image.load("./assets/family/mother.png").convert_alpha(),   (120, 120)),
             pygame.transform.scale(pygame.image.load("./assets/family/son.png").convert_alpha(),      (120, 120))]
-        #self.menu(pygame.time.Clock(), False)
 
     def draw_text(self, text, menu_font, color, surface, x, y):
         textobj = menu_font.render(text, 1, color)

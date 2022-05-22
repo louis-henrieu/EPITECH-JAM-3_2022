@@ -5,7 +5,7 @@ class Quest(pygame.sprite.Sprite):
     Y_POS = 320
 
     def __init__(self):
-        self.quest = pygame.image.load('quest.png')
+        self.quest = pygame.image.load('./assets/text/quest.png')
         self.quest = pygame.transform.scale(self.quest, (700, 350))
         self.texts = ["Trouvez Sasha en réalisant 3 défis !", "1) Trouvez chacun 1 donut pour Sasha.", "2) Resolvez l'énigme de la maison de Sasha !"]
         self.text_idx = 0
