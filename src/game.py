@@ -5,6 +5,7 @@ import pyscroll
 from pygame import mixer
 from src.player import Player, Player2
 from src.menu import Menu
+from src.win import Win
 from src.info import Info
 from src.quest import Quest
 from src.talk_box import TalkBox
@@ -20,13 +21,14 @@ class Game:
         pygame.display.set_caption("Family Reunion")
 
         # Charger la musique
-        #mixer.music.load('../assets/music/simpson.mp3')
-        #mixer.music.play(-1)
+        mixer.music.load('./assets/music/simpson.mp3')
+        mixer.music.play(-1)
 
         # Choix du personnage
         self.player_1 = True # Dad (true) / Mom (false)
         self.player_2 = True # Son (true) / Daughter (false)
 #
+        self.myWin = Win(self.screen)
         self.myMenu = Menu(self.screen, self.player_1, self.player_2)
         self.running, self.player_1, self.player_2 = self.myMenu.menu(True)
 
@@ -109,6 +111,9 @@ class Game:
             # Ouverture du menu grâce à la touche M
             if pressed[pygame.K_m]:
                 self.running, self.player_1, self.player_2 = self.myMenu.menu(False)
+            # Ouverture du menu grâce à la touche W
+            if pressed[pygame.K_w]:
+                self.running = self.myWin.win(False)
             clock.tick(60)
 
         pygame.quit()
