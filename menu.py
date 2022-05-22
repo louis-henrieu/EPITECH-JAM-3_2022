@@ -25,13 +25,17 @@ class Menu:
         button_font = pygame.font.SysFont("symbola", 60)
         choose_font = pygame.font.SysFont("symbola", 35)
         name_font = pygame.font.SysFont("symbola", 25)
+        #menu_font = pygame.font.SysFont("symbola", 80)
+        #button_font = pygame.font.SysFont("symbola", 40)
+        #choose_font = pygame.font.SysFont("symbola", 25)
+        #name_font = pygame.font.SysFont("symbola", 15)
         #menu_text = menu_font.render('Menu' , True , (255, 255, 255))
         button_1_text = button_font.render('Play' if ingame else 'Resume' , True , (255, 255, 255))
         button_2_text = button_font.render('Quit' , True , (255, 255, 255))
         choose_text = choose_font.render('Choisis ta famille' , True , (255, 255, 255))
         name_text = [
-            name_font.render('Patrik (le père)' , True , (255, 255, 255)),
-            name_font.render('Mary (la mère)' , True , (255, 255, 255)),
+            name_font.render('Petrik (le père)' , True , (255, 255, 255)),
+            name_font.render('Yuyu (la mère)' , True , (255, 255, 255)),
             name_font.render('Mattéo (le fils)' , True , (255, 255, 255)),
             name_font.render('Lise (la fille)' , True , (255, 255, 255))]
         menu_loop = True
