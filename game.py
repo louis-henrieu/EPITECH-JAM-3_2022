@@ -9,6 +9,8 @@ from info import Info
 from quest import Quest
 
 class Game:
+    donut_nb = 0
+    donut_nb1 = 0
 
     def __init__(self):
         # Démarrage
@@ -70,6 +72,12 @@ class Game:
         enter_house = tmx_data.get_object_by_name("enter_house")
         self.enter_house_rect = pygame.Rect(enter_house.x, enter_house.y, enter_house.width, enter_house.height)
 
+        # Définir les donuts
+        donut1 = tmx_data.get_object_by_name("donut_1")
+        self.donut1 = pygame.Rect(donut1.x, donut1.y, donut1.width, donut1.height)
+        donut2 = tmx_data.get_object_by_name("donut_2")
+        self.donut2 = pygame.Rect(donut2.x, donut2.y, donut2.width, donut2.height)
+
     def handle_input(self, pressed):
 
         if pressed[pygame.K_ESCAPE]:
@@ -95,6 +103,24 @@ class Game:
             self.player2.move_player("right")
         elif pressed[pygame.K_s]:
             self.player2.move_player("left")
+
+    # Display if donuts found
+    def display_donut(self):
+        if self.donut_nb == 1 and self.donut_nb1 == 1:
+            my_font = pygame.font.SysFont('symbola', 30, bold=True)
+            text_surface = my_font.render("2/2 donuts! Bravo!", False,(3,37,126))
+            self.screen.blit(text_surface, (450, 450))
+            pygame.display.flip()
+            pygame.event.pump()
+            pygame.time.delay(1000)
+            self.info.update_quests_done(self.screen)
+        elif self.donut_nb == 1 or self.donut_nb1 == 1:
+            my_font = pygame.font.SysFont('symbola', 30, bold=True)
+            text_surface = my_font.render("1/2 donuts trouvés", False, (3,37,126))
+            self.screen.blit(text_surface, (470, 450))
+            pygame.display.flip()
+            pygame.event.pump()
+            pygame.time.delay(1000)
 
     def switch_house(self):
         self.map = "house"
@@ -168,7 +194,13 @@ class Game:
             self.switch_house()
         if self.map == "house" and self.player.feet.colliderect(self.enter_house_rect) and self.player2.feet.colliderect(self.enter_house_rect):
             self.switch_world()
-           
+        if self.map == "world" and self.player.feet.colliderect(self.donut1) and self.donut_nb != 1:
+            self.donut_nb = 1
+            self.display_donut()
+        if self.map == "world" and self.player2.feet.colliderect(self.donut2) and self.donut_nb1 != 1:
+            self.donut_nb1 = 1
+            self.display_donut()
+
         # Vérification des collisions
         for sprite in self.group.sprites():
             if sprite.feet.collidelist(self.walls) > -1:

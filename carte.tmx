@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.8" tiledversion="1.8.5" orientation="orthogonal" renderorder="right-down" width="50" height="50" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="81">
+<map version="1.8" tiledversion="1.8.5" orientation="orthogonal" renderorder="right-down" width="50" height="50" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="83">
  <tileset firstgid="1" source="nature.tsx"/>
  <tileset firstgid="721" source="house.tsx"/>
- <tileset firstgid="1496" source="../pygame-graven/nature.tsx"/>
+ <tileset firstgid="1496" source="nature.tsx"/>
  <tileset firstgid="2216" name="donut" tilewidth="16" tileheight="16" tilecount="4" columns="2">
   <image source="donut.png" width="34" height="34"/>
  </tileset>
- <tileset firstgid="2220" source="../pygame-graven/house.tsx"/>
+ <tileset firstgid="2220" source="house.tsx"/>
  <layer id="1" name="background" width="50" height="50">
   <data encoding="csv">
 323,324,323,324,323,324,323,324,323,324,323,324,323,324,323,324,323,324,323,324,323,324,323,324,323,324,323,324,323,324,323,324,323,324,323,324,323,324,323,324,323,324,323,324,323,324,323,324,323,324,
@@ -356,6 +356,8 @@
   <object id="80" name="player_2" x="460.51" y="430.826">
    <point/>
   </object>
+  <object id="81" name="donut_1" x="593.947" y="271.867" width="28.019" height="29.4061"/>
+  <object id="82" name="donut_2" x="128.998" y="242.184" width="31.9028" height="29.4061"/>
  </objectgroup>
  <layer id="7" name="roof" width="50" height="50">
   <data encoding="csv">
